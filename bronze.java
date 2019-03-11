@@ -33,8 +33,8 @@ public class bronze{
         int D = Integer.parseInt(inf.next());
       /*  System.out.println(Rs);
         System.out.println(Cs);
-        System.out.println(D);
-        stomp(Rs, Cs, D); */
+        System.out.println(D); */
+        stomp(Rs, Cs, D);
         numDigs --;
       //  System.out.println(toString());
       }
@@ -58,7 +58,7 @@ public class bronze{
           }
         }
       }
-      System.out.println("highest : " + highest);
+//      System.out.println("highest : " + highest);
       for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
           if (lake[Rs + i][Cs + j] == highest){
