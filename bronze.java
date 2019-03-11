@@ -10,6 +10,7 @@ public class bronze{
   int elevation;
   int numDigs;
   int[][] lake;
+  int answer;
 
   public bronze(String filename){
     try{
@@ -30,12 +31,12 @@ public class bronze{
         int Rs = Integer.parseInt(inf.next())-1;
         int Cs = Integer.parseInt(inf.next())-1;
         int D = Integer.parseInt(inf.next());
-        System.out.println(Rs);
+      /*  System.out.println(Rs);
         System.out.println(Cs);
         System.out.println(D);
-        stomp(Rs, Cs, D);
+        stomp(Rs, Cs, D); */
         numDigs --;
-        System.out.println(toString());
+      //  System.out.println(toString());
       }
     }catch(FileNotFoundException e){
       System.out.println("File Not Found");
@@ -43,12 +44,8 @@ public class bronze{
 
   }
 
-  public int makeLake(int R, int C, int E, int N){
-    return 0;
 
-  }
-
-  public boolean stomp(int Rs, int Cs, int D){
+  private boolean stomp(int Rs, int Cs, int D){
     if (Rs < 0 || Cs < 0 || Rs > row - 2 || Cs > col -2 || D < 1 || D > 40){
       return false;
     }
@@ -72,6 +69,14 @@ public class bronze{
       D--;
     }
     return true;
+  }
+
+  public int getElevation(){
+    return elevation;
+  }
+
+  public int[][] getLake(){
+    return lake;
   }
 
 
