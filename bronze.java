@@ -26,7 +26,7 @@ public class bronze{
           lake[i][j] = Integer.parseInt(inf.next());
         }
       }
-      System.out.println(toString());
+    //  System.out.println(toString());
       while (numDigs > 0){
         int Rs = Integer.parseInt(inf.next())-1;
         int Cs = Integer.parseInt(inf.next())-1;
