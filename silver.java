@@ -4,75 +4,83 @@ import java.io.*;
 
 public class silver{
   File text;
-  Scanner inf;
-  int[][] map;
-  int[][][] tmap; //map with time;
-  int ans;
-  int[] x = new int[] {1,-1,0,0};
-  int[] y = new int[] {0,0,1,-1};
-  int r1,r2,c1,c2;
-  int n,m,t;
+  Scanner in;
+  int rows;
+  int cols;
+  int time;
+  int startr;
+  int startc;
+  int endr;
+  int endc;
+  int[][] moves = {{0,1}, {0,-1}, {1,0}, {-1, 0}};
+  String s = "";
+  char[][] board;
+    public silver(String filename){
 
-  public silver(String filename){
+
     try{
       text = new File(filename);
-      inf = new Scanner(text);
-      n = Integer.parseInt(inf.next());
-      m = Integer.parseInt(inf.next());
-      t = Integer.parseInt(inf.next());
-  /*    System.out.println("n: " + n);
-      System.out.println("m: " + m);
-      System.out.println("t: " + t);*/
-      inf.nextLine();
-      map = new int[n][m];
-      tmap = new int[n][m][t+1];
-      for (int i = 0; i < n; i++) {
-        String line = inf.nextLine();
-        //System.out.println(line);
-        for (int j = 0; j < m; j++) {
-            map[i][j] = line.charAt(j);
-            tmap[i][j][0] = 0;
+      in = new Scanner(text);
+      rows = in.nextInt();
+      cols = in.nextInt();
+      time = in.nextInt();
+      in.nextLine();
+      String path = "";
+      while(in.hasNextLine()){
+        path = in.nextLine();
+        s += path;
+      }
+      int index = 0;
+      board = new char[rows][cols];
+      for(int r = 0; r < rows; r++){
+        for(int c = 0; c < cols; c++){
+          board[r][c] = s.charAt(index);
+          index++;
+        }
+      }
+      String[] nums = path.split(" ");
+      startr = Integer.parseInt(nums[0]) - 1;
+      startc = Integer.parseInt(nums[1]) - 1;
+      endr = Integer.parseInt(nums[2]) - 1;
+      endc = Integer.parseInt(nums[3]) - 1;
+    }
+    catch(FileNotFoundException e){}
+    }
+
+
+    public int cTravel(){
+    int[][] current = new int[rows][cols];
+    int[][] previous = new int[rows][cols];
+    for(int r = 0; r < rows; r++){
+      for(int c = 0; c < cols; c++){
+        if(board[r][c] == '*'){
+          current[r][c] = -1;
+        }
+      }
+    }
+    current[startr][startc] = 1;
+    while(time > 0){
+      for(int r = 0; r < rows; r++){
+        for(int c = 0; c < cols; c++){
+          previous[r][c] = current[r][c];
+        }
+      }
+      for(int r = 0; r < rows; r++){
+        for(int c = 0; c < cols; c++){
+          if(board[r][c] != '*'){
+            current[r][c] = 0;
+            for(int i = 0; i < moves.length; i++){
+              int checkr = r + moves[i][0];
+              int checkc = c + moves[i][1];
+              if(checkr < rows && checkc < cols && checkr >= 0 && checkc >= 0 && previous[checkr][checkc]!= -1){
+                current[r][c] += previous[checkr][checkc];
+              }
+            }
           }
         }
-    	r1 = Integer.parseInt(inf.next())-1;
-      c1 = Integer.parseInt(inf.next())-1;
-      r2 = Integer.parseInt(inf.next())-1;
-      c2 = Integer.parseInt(inf.next())-1;
-
-  /*    System.out.println("r1: " + r1);
-      System.out.println("c1: " + c1);
-      System.out.println("r2: " + r2);
-      System.out.println("c2: " + c2);*/
-
-    }catch(FileNotFoundException e){
-      System.out.println("File Not Found");
+      }
+      time --;
     }
+    return current[endr][endc];
   }
-
-
-
-  public int cTravel(){
-    tmap[r1][c1][0] = 1;
-    for (int i = 0; i < t; i ++) {
-				for (int j = 0; j < m; j ++) {
-					for (int k = 0; k < n; k ++) {
-						for (int l = 0; l < 4; l ++) {
-							int xMove = j + x[l];
-							int yMove = k + y[l];
-							if (xMove >= 0 && xMove < m && yMove >= 0 && yMove < n) {
-								if (map[xMove][yMove] != '*') {
-									tmap[j][k][i+1] += tmap[xMove][yMove][i];
-								}
-							}
-						}
-					}
-				}
-			}
-			ans = tmap[r2][c2][t];
-//    System.out.println(ans);
-    return ans;
-
-  }
-
-
 }
