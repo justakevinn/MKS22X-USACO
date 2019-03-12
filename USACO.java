@@ -17,7 +17,7 @@ public class USACO{
 
 
 
-  public static void main(String[] args)throws FileNotFoundException{
+  /*public static void main(String[] args)throws FileNotFoundException{
     System.out.println(bronze("makelake.1.in"));
     System.out.println(silver("ctravel.1.in"));
     File correct = new File("testCases/ctravel." + 1 + ".out");
@@ -44,7 +44,7 @@ public class USACO{
     yes = new Scanner(correct);
     correctAnswer = yes.nextInt();
     System.out.println(correctAnswer);
-  }
+  }*/
 
 
 
